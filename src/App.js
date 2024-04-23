@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import data from "./data";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+        <a href="/">amazona</a>
       </header>
+      <main>
+        <h1>Featured Products</h1>
+        <div className="products">
+          {data.products.map((product)=>(
+            <div className="product" key={product.slug}>
+              <a href={`/product/${product.slug}`}>
+        <img src={product.image} alt ={product.name}/>
+        </a>
+        <div className="product-info">
+          <a href={`/products/${product.slug}`}>
+          <p>{product.name}</p>
+          </a>
+        <p>
+          <strong>${product.price}</strong>
+        </p>
+        <button>Add to cart</button>
+    </div>
+    </div>
+    ))}
+    </div>
+  </main>
     </div>
   );
 }
 
 export default App;
+
+
+
+//list products
+
+//1)create product array
+//2)add product images
+//3)render products
+//4)style products
+
