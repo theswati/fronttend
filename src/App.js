@@ -1,14 +1,24 @@
 import data from "./data";
 import {BrowserRouter,Route,Routes} from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
-import ProductScreen from "./screens/ProductScreen"
+import ProductScreen from "./screens/ProductScreen";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import {LinkContainer} from "react-router-bootstrap"
+
 
 function App() {
   return (
   <BrowserRouter>
-    <div>
+    <div className="d-flex flex-column site container">
       <header>
-        <a href="/">amazona</a>
+        <Navbar bg="dark" variant="dark">
+          <Container>
+            <LinkContainer to="/">
+              <Navbar.Brand>amazona</Navbar.Brand>
+            </LinkContainer>
+          </Container>
+        </Navbar>
       </header>
       <main>
         <Routes>
@@ -16,6 +26,9 @@ function App() {
           <Route path="/" element={<HomeScreen/>}/>
         </Routes>
         </main>
+        <footer>
+          <div className="text-center">All rights reserved</div>
+        </footer>
         </div>
     </BrowserRouter>
 
@@ -59,3 +72,22 @@ export default App;
 // 1. define reducer
 // 2. update fetch data
 // 3. get state from usReducer
+
+
+//Task-5
+// Bootstrap
+
+//Bootstrap provides a collection of syntax for template design
+//it is free,open source front end development framework for the creation of websites and web apps.
+
+// Add bootstrap UI Framework
+//     1. npm install react-bootstrap bootstrap
+//     2. update App.js
+
+
+//Task-6
+// Create Product and Rating Component
+// 1. create Rating component
+// 2. Create Product component
+// 3. Use Rating component in Product component
+
