@@ -39,6 +39,19 @@ header a{
 main{
   padding:1rem;
 } */
+.btn-primary{
+  background-color: #f0c040;
+  color:#000000
+}
+
+
+.rating span{
+  color:#ffc000
+}
+
+
+
+
 .products{
   display:flex;
   flex-wrap: wrap;
