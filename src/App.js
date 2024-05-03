@@ -99,3 +99,10 @@ export default App;
 //     2. create 3 columns for image, info and action
 
 //listgroup,row,col.helmet,badge-bootstrap
+
+//Tak-8
+// Create Loading and Message Component
+//     1. create loading component
+//     2. use spinner component
+//     3. create message component
+//     4. createutils.js  to define getError fuction
