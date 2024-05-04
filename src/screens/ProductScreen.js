@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect,useReducer } from "react";
+import { useContext,useEffect,useReducer } from "react";
 import { ListGroup } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Row from "react-bootstrap/Row";
@@ -12,12 +12,13 @@ import {Helmet} from "react-helmet-async";
 import LoadingBox from "../Components/LoadingBox";
 import MessageBox from "../Components/MessageBox";
 import  getError  from "../utils";
+import {Store} from "../Store";
 
 
 
 const reducer=(state,action)=>{
-    console.log("state",state)
-    console.log("action",action)
+    // console.log("state",state)
+    // console.log("action",action)
      switch(action.type){
     case "FETCH_REQUEST":
        return{...state,loading:true}
@@ -34,11 +35,11 @@ const reducer=(state,action)=>{
 };
 function ProductScreen(){
     const params=useParams();//{slug:"ghjjjhhjj"}
-    console.log("params",params)
+    // console.log("params",params)
     let slug= params.slug
 
     const[{loading,error,product},dispatch]=useReducer(reducer,{
-        products:[],
+        product:[],
         loading:true,
         error:"",
        }) 
@@ -59,6 +60,34 @@ function ProductScreen(){
         };
             fetchData();
         },[slug]); 
+
+        const{state,dispatch:ctxDispatch}=
+        useContext(Store);
+
+        const {cart}=state;
+        const addToCartHandler=async()=>{
+             let existItem;
+            if(cart.cartItems && cart.cartItems.length>0){
+              existItem = cart.cartItems.find((x)=>x._id===product._id);
+            }
+            else {
+              existItem = null
+            }
+
+             const quantity=existItem?existItem.quantity+1:1;
+             const {data}=await
+             axios.get(`/api/products/${product._id}`);
+             if(data.countInStock < quantity){
+                window.alert('sorry. Product is out of stock');
+                return;
+             }
+            
+            ctxDispatch({
+                    type:'CART_ADD_ITEM',
+                    payload:{...product,quantity}
+                });
+
+        }
 
 
     return loading?(
@@ -84,10 +113,10 @@ function ProductScreen(){
                                 </Helmet>
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                <Rating>
+                                <Rating 
                                     rating={product.rating}
                                     numReviews={product.numReviews}
-                                </Rating>
+                                />
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 Price:${product.price}
@@ -123,7 +152,7 @@ function ProductScreen(){
                                         {product.countInStock>0 &&(
                                             <ListGroup.Item>
                                                 <div className="d-grid">
-                                                    <Button variant="primary">
+                                                    <Button onClick={addToCartHandler}variant="primary">
                                                         Add to Cart
                                                         </Button>
 
