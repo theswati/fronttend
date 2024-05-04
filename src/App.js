@@ -3,11 +3,19 @@ import {BrowserRouter,Route,Routes} from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import Navbar from "react-bootstrap/Navbar";
+import Badge from "react-bootstrap/Badge"
+import Nav from "react-bootstrap/Nav"
 import Container from "react-bootstrap/Container";
 import {LinkContainer} from "react-router-bootstrap"
-
+import { useContext } from "react";
+import {Store} from "./Store"
+import { Link } from "react-router-dom";
 
 function App() {
+
+  const {state}=useContext(Store);
+  const {cart}=state;
+    console.log(cart)
   return (
   <BrowserRouter>
     <div className="d-flex flex-column site-container">
@@ -17,6 +25,16 @@ function App() {
             <LinkContainer to="/">
               <Navbar.Brand>amazona</Navbar.Brand>
             </LinkContainer>
+            <Nav className="me-auto">
+              <Link to="/cart" className="nav-link">
+                Cart
+                {cart.cartItems && cart.cartItems.length>0 && (
+                  <Badge pill bg="danger">
+                    {cart.cartItems.reduce((a,c)=>a+c.quantity,0)}
+                  </Badge>
+                )}
+                </Link>
+           </Nav>
           </Container>
         </Navbar>
       </header>
@@ -36,6 +54,8 @@ function App() {
 
   );
 }
+
+
 
 export default App;
 
@@ -106,3 +126,21 @@ export default App;
 //     2. use spinner component
 //     3. create message component
 //     4. createutils.js  to define getError fuction
+
+//Task-9-cart screen
+// Create React Context For Add Item To Cart
+//     1. Create React Context
+//     2. define reducer
+//     3. create store provider
+//     4. implement add to cart button click handler
+
+//Task-10
+// Complete Add To Cart
+// 1. check exist item in the cart
+//  2. check count in stock in backend
+
+//Tasak-11
+// Create Cart Screen
+// 1. create 2 columns
+//  2.display items list
+// .3. create action column
