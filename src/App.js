@@ -10,6 +10,7 @@ import {LinkContainer} from "react-router-bootstrap"
 import { useContext } from "react";
 import {Store} from "./Store"
 import { Link } from "react-router-dom";
+import CartScreen from "./screens/CartScreen";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
                 Cart
                 {cart.cartItems && cart.cartItems.length>0 && (
                   <Badge pill bg="danger">
+                   {/* [1, 2, 1,3] */}
                     {cart.cartItems.reduce((a,c)=>a+c.quantity,0)}
                   </Badge>
                 )}
@@ -43,6 +45,8 @@ function App() {
         <Routes>
           < Route path="/product/:slug" element={<ProductScreen/>}/>
           <Route path="/" element={<HomeScreen/>}/>
+          <Route path="/cart" element={<CartScreen/>}/>
+
         </Routes>
         </Container>
         </main>

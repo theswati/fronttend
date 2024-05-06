@@ -67,14 +67,15 @@ function ProductScreen(){
         const {cart}=state;
         const addToCartHandler=async()=>{
              let existItem;
+             //  [shirt(3), pant(1), dhoti(3),]
             if(cart.cartItems && cart.cartItems.length>0){
               existItem = cart.cartItems.find((x)=>x._id===product._id);
             }
             else {
               existItem = null
             }
-
-             const quantity=existItem?existItem.quantity+1:1;
+            
+             const quantity=existItem ? existItem.quantity+1: 1;
              const {data}=await
              axios.get(`/api/products/${product._id}`);
              if(data.countInStock < quantity){

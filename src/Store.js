@@ -16,12 +16,24 @@ function reducer(state,action){
     switch(action.type){
         case 'CART_ADD_ITEM':
             //add to cart
+
+            // let obj={
+            //     name: "shirt",
+            //     q : 1
+            // }
+            // let newItem = {
+            //     name: "shirt",
+            //     q:2
+            // }
             const newItem=action.payload;
             const existItem=state.cart.cartItems.find(
                 (item)=>item._id===newItem._id
             );
             const cartItems=existItem
-            ?state.cart.cartItems.map((item)=>
+            ?
+            // [a,b,c,d,e] => [a,b, newItem, d,e]
+        //    let arr =  
+           state.cart.cartItems.map((item)=>
             item._id===existItem._id?newItem:item
         )
         :[...state.cart.cartItems,newItem];
