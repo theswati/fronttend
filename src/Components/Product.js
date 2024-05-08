@@ -12,12 +12,14 @@ function Product(props){
 const {product} = props;
 
   const{state,dispatch:ctxDispatch}=useContext(Store);
-  const{
-    cart:{cartItems},
-  }=state;
+  const{cart:{cartItems}}=state;
+
   const addToCartHandler=async(item)=>{
     const existItem=cartItems.find((x)=>x._id===product._id);
+    
     const quantity=existItem?existItem.quantity+1:1;
+
+    console.log(existItem, quantity)
     const {data}=await
     axios.get(`/api/products/${item._id}`);
     if (data.countInStock<quantity){
@@ -44,7 +46,7 @@ const {product} = props;
           />
          <Card.Text>${product.price}</Card.Text>
 
-         <Button className="btn-primary">Add to cart</Button>
+         <Button className="btn-primary" onClick={()=>addToCartHandler(product)}>Add to cart</Button>
     </Card.Body>
    </Card>
     );

@@ -11,6 +11,7 @@ import { useContext } from "react";
 import {Store} from "./Store"
 import { Link } from "react-router-dom";
 import CartScreen from "./screens/CartScreen";
+import SigninScreen from "./screens/SigninScreen";
 
 function App() {
 
@@ -43,10 +44,10 @@ function App() {
       <main>
         <Container>
         <Routes>
-          < Route path="/product/:slug" element={<ProductScreen/>}/>
+          <Route path="/product/:slug" element={<ProductScreen/>}/>
           <Route path="/" element={<HomeScreen/>}/>
+          <Route path="/signin" element={<SigninScreen/>}/>
           <Route path="/cart" element={<CartScreen/>}/>
-
         </Routes>
         </Container>
         </main>
@@ -154,3 +155,9 @@ export default App;
 // 1. click handler for inc/dec item
 // 2. click handler for remove item
 // 3. click handler for checkout
+
+//Task-13
+// Create Signin Screen
+//     1. create sign in form
+//     2. add email and password
+//     3. add signin button
