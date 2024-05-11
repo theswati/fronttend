@@ -7,6 +7,11 @@ export const Store=createContext()
 
 //usereducer
 const initialState={
+     userInfo:localStorage.getItem('userInfo')
+     ?JSON.parse(localStorage.getItem('userInfo'))
+     :null,
+
+
     cart:{
         cartItems:localStorage.getItem('cartItems')
         ?JSON.parse(localStorage.getItem('cartItems')):[],
@@ -45,6 +50,15 @@ function reducer(state,action){
                 cart:{...state.cart, cartItems},
             };
 
+            case 'USER_SIGNIN':
+                return{...state,userInfo:action.payload};
+
+           case 'USER_SIGNOUT':
+                    return{
+                        ...state,
+                        userInfo:null,
+                    };
+        
             case 'CART_REMOVE_ITEM':{
                 const cartItems=state.cart.cartItems.filter(
                     (item)=>item._id!==action.payload._id

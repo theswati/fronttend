@@ -1,10 +1,13 @@
 import data from "./data";
 import {BrowserRouter,Route,Routes} from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge"
 import Nav from "react-bootstrap/Nav"
+import NavDropdown  from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import {LinkContainer} from "react-router-bootstrap"
 import { useContext } from "react";
@@ -15,12 +18,21 @@ import SigninScreen from "./screens/SigninScreen";
 
 function App() {
 
-  const {state}=useContext(Store);
-  const {cart}=state;
-    console.log(cart)
+  // const {state}=useContext(Store);
+  // const {cart}=state;
+  //   console.log(cart)
+    const{state,dispatch:ctxDispatch}=useContext(Store);
+    const{cart,userInfo}=state;
+
+    const signoutHandler=()=>{
+      ctxDispatch({type:'USER_SIGNOUT'});
+      localStorage.removeItem('userInfo')
+    }
+
   return (
   <BrowserRouter>
     <div className="d-flex flex-column site-container">
+    <ToastContainer position="bottom-center" limit={1}/>
       <header>
         <Navbar bg="dark" variant="dark">
           <Container>
@@ -37,6 +49,28 @@ function App() {
                   </Badge>
                 )}
                 </Link>
+                {userInfo?(
+                  <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+
+                    <LinkContainer to ="/profile">
+                      <NavDropdown.Item>User Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to ="/orderhistory">
+                      <NavDropdown.Item>Order History</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Divider/>
+                    <Link
+                      className="dropdown-item"
+                      to="#signout"
+                      onClick={signoutHandler}
+                      >Sign Out
+                      </Link>
+                  </NavDropdown>
+                ):(
+                  <Link className="nav-link" to="/signin">
+                    Sign In
+                  </Link>
+                )}
            </Nav>
           </Container>
         </Navbar>
@@ -161,3 +195,40 @@ export default App;
 //     1. create sign in form
 //     2. add email and password
 //     3. add signin button
+
+//Task-14
+// Connect To MongoDB Database
+//     1. create atlas monogodb database
+//     2. install local mongodb database
+//     3. npm install mongoose
+//     4. connect to mongodb database
+
+
+// //Task-15
+// Seed Sample Products
+//     1. create Product model
+//     2. create seed route
+//     3. use route in server.js
+//     4. seed sample product
+
+//Task-16
+//Seed Sample Users
+//  1. create user model
+//  2. seed sample users
+
+//Task-17
+// Create Signin Backend API
+// 1. create signin api
+// 2. npm install jsonwebtoken
+// 3. define generateToken
+
+// //Task-18
+// Complete Signin Screen
+// 1. handle submit action
+// 2. save token in store and local storage
+//  3. show user name in header
+
+// Create Shipping Screen
+// 1. create form inputs
+//  2. handle save shipping address
+// 3. add checkout wizard bar
