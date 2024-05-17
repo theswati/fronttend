@@ -15,7 +15,11 @@ const {product} = props;
   const{cart:{cartItems}}=state;
 
   const addToCartHandler=async(item)=>{
-    const existItem=cartItems.find((x)=>x._id===product._id);
+    let existItem
+    if(cartItems){
+      console.log("hhhh",cartItems)
+       existItem= cartItems.find((x)=>x._id===product._id);
+    }
     
     const quantity=existItem?existItem.quantity+1:1;
 

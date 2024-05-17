@@ -15,6 +15,8 @@ import {Store} from "./Store"
 import { Link } from "react-router-dom";
 import CartScreen from "./screens/CartScreen";
 import SigninScreen from "./screens/SigninScreen";
+import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+import SignupScreen from "./screens/SignupScreen";
 
 function App() {
 
@@ -26,7 +28,8 @@ function App() {
 
     const signoutHandler=()=>{
       ctxDispatch({type:'USER_SIGNOUT'});
-      localStorage.removeItem('userInfo')
+      localStorage.removeItem('userInfo');
+      localStorage.removeItem('shippingAddress');
     }
 
   return (
@@ -81,7 +84,9 @@ function App() {
           <Route path="/product/:slug" element={<ProductScreen/>}/>
           <Route path="/" element={<HomeScreen/>}/>
           <Route path="/signin" element={<SigninScreen/>}/>
+          <Route path="/signup" element={<SignupScreen/>}/>
           <Route path="/cart" element={<CartScreen/>}/>
+          <Route path="/shipping" element={<ShippingAddressScreen/>}></Route>
         </Routes>
         </Container>
         </main>
@@ -228,7 +233,15 @@ export default App;
 // 2. save token in store and local storage
 //  3. show user name in header
 
+
+//Task-19
 // Create Shipping Screen
 // 1. create form inputs
 //  2. handle save shipping address
 // 3. add checkout wizard bar
+
+//Task-20
+//Create signup screen
+//1.create input forms
+//2.handle submit
+//3.create backend API
