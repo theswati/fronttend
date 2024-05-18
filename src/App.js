@@ -17,6 +17,7 @@ import CartScreen from "./screens/CartScreen";
 import SigninScreen from "./screens/SigninScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SignupScreen from "./screens/SignupScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen"
 
 function App() {
 
@@ -30,7 +31,8 @@ function App() {
       ctxDispatch({type:'USER_SIGNOUT'});
       localStorage.removeItem('userInfo');
       localStorage.removeItem('shippingAddress');
-    }
+      localStorage.removeItem('paymentMethod')
+    };
 
   return (
   <BrowserRouter>
@@ -87,6 +89,8 @@ function App() {
           <Route path="/signup" element={<SignupScreen/>}/>
           <Route path="/cart" element={<CartScreen/>}/>
           <Route path="/shipping" element={<ShippingAddressScreen/>}></Route>
+          <Route path="/payment" element={<PaymentMethodScreen/>}>       
+          </Route>
         </Routes>
         </Container>
         </main>
@@ -245,3 +249,14 @@ export default App;
 //1.create input forms
 //2.handle submit
 //3.create backend API
+
+//Task-21
+//Implement select payment method screen
+//1.Create input forms
+//2.handle submit
+
+//Task-22
+//create place order screen
+//1.show cartitems ,payment and address
+//2.handle place order screen
+//3.create order and create api
