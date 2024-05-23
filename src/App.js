@@ -262,3 +262,8 @@ export default App;
 //1.show cartitems ,payment and address
 //2.handle place order screen
 //3.create order and create api
+
+//Task-23
+//Implement Place order screen
+//1.handle place order action
+//2.create order create api
